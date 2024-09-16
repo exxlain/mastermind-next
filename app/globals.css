@@ -3,25 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bright-gold: #DBA338;
+  --muted-gold: #C3883E;
+  --dark-red: #471107;
+  --background: #654837;
+  --shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
 }
 
 body {
-  color: var(--foreground);
+  color: var(--bright-gold);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
 }

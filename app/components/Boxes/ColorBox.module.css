@@ -1,0 +1,19 @@
+.box {
+  width: 90px;
+  height: 90px;
+  border-top: 3px ridge var(--bright-gold);
+  border-left: 3px groove var(--bright-gold);
+  border-right: 3px ridge var(--bright-gold);
+  border-bottom: 3px groove var(--bright-gold);
+  font-size: 70px;
+  color: var(--muted-gold);
+  font-family: 'CastlemarRegular', serif;
+  margin: 0;
+  padding: 0;
+  box-shadow: var(--shadow);
+
+}
+.text {
+  text-align: center;
+  margin: 5%;
+}

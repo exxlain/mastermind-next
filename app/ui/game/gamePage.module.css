@@ -1,0 +1,84 @@
+.page {
+  max-width: 650px;
+  margin: 0 auto;
+  position: relative;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.headerButton {
+  height: 40px;
+  border-radius: 8px;
+  margin: 10px 0 15px;
+  background-color: var(--muted-gold);
+  font-family: 'CastlemarRegular', serif;
+  font-size: 25px;
+  color: black;
+  border-top: 4px ridge var(--muted-gold);
+  border-left: 4px groove var(--muted-gold);
+  border-right: 4px ridge var(--muted-gold);
+  border-bottom: 4px groove var(--muted-gold);
+  box-shadow: var(--shadow);
+}
+.headerButton:hover {
+  background-color: var(--bright-gold);
+}
+
+.checkButton{
+  margin: 10px auto;
+  width: 170px;
+  letter-spacing: 2px;
+  border-radius: 8px;
+  font-family: 'CastlemarRegular', serif;
+  color: var(--bright-gold);
+  font-size: 30px;
+  font-weight: 400;
+  text-shadow: 0 1px 3px #000;
+  text-align: center;
+  padding: 10px 0;
+  background: radial-gradient(circle, #8b0000, #8b0000);
+  border-top: 4px ridge var(--bright-gold);
+  border-left: 4px groove var(--bright-gold);
+  border-right: 4px ridge var(--bright-gold);
+  border-bottom: 4px groove var(--bright-gold);
+  box-shadow: var(--shadow);
+}
+
+.checkButton:hover:not([disabled]) {
+  background: radial-gradient(circle, #e52b2b, #8b0000);
+  box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+}
+
+.checkButton:active{
+  background: radial-gradient(circle, #ec6a6a, #e52b2b);
+  box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
+}
+.checkButton:disabled {
+  color: var(--muted-gold);
+  border-color: var(--muted-gold);
+}
+.selectVariantsWrapper {
+  border: 1px solid var(--bright-gold);
+  border-radius: 8px;
+  min-height: 60px;
+  box-shadow:  var(--shadow);
+}
+.results {
+  border: 1px solid var(--bright-gold);
+  border-radius: 8px;
+  min-height: 600px;
+  box-shadow:  var(--shadow);
+}
+.resultsText {
+  font-size: 30px;
+  margin: 10px;
+  padding: 0;
+}
+
+.checkInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}

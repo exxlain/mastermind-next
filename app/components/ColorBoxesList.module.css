@@ -1,0 +1,12 @@
+.resultItem {
+  border-bottom: 1px solid var(--muted-gold);
+}
+.colorsList {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 5px;
+}
+.resultsList {
+  display: flex;
+  margin: 0 0 10px 0;
+}

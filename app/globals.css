@@ -13,4 +13,5 @@
 body {
   color: var(--bright-gold);
   background: var(--background);
+  line-height: normal;
 }

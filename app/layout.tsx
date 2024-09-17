@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import StoreProvider from '@/app/StoreProvider';
 
 const Castlemar = localFont({
   src: "./fonts/CastlemarRegular.otf",
@@ -17,12 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${Castlemar.className} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={`${Castlemar.className} antialiased`}>
+          {children}
+         </body>
+      </html>
+    </StoreProvider>
   );
 }

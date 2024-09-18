@@ -1,19 +1,20 @@
 import type { NextAuthConfig } from 'next-auth';
+import { Routes } from '@routes';
 
 export const authConfig = {
     pages: {
-        signIn: '/ui/login',
+        signIn: Routes.LOGIN,
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
-            const isOnDashboard = nextUrl.pathname.startsWith('/ui/dashboard');
-            if (isOnDashboard) {
+            const isOnGamePage = nextUrl.pathname.startsWith(Routes.GAME);
+            if (isOnGamePage) {
                 if (isLoggedIn) return true;
-                console.log('here')
                 return false; // Redirect unauthenticated users to login page
             } else if (isLoggedIn) {
-                return Response.redirect(new URL('/ui/dashboard', nextUrl));
+                const newUrl = new URL(Routes.GAME, nextUrl)
+                return Response.redirect(newUrl);
             }
             return true;
         },

@@ -29,6 +29,7 @@ import Fireworks from '@/app/components/Fireworks/Fireworks';
 import Info from '@/app/components/Info';
 import styles from './GamePage.module.css';
 import Link from 'next/link';
+import {signOutAction} from "@/app/lib/actions";
 
 
 export default function Page() {
@@ -68,12 +69,21 @@ export default function Page() {
       {victoryState && <Fireworks/>}
       <div className={styles.page}>
         <header className={styles.header}>
-          <Link
-            href={Routes.SCORE}
-            className={styles.headerButton}
-            aria-label="Go to score page"
+          <button
+              className={styles.headerButton}
+              aria-label="Logout"
+              onClick={async () => {
+                await signOutAction();
+              }}
           >
-            Go to start page
+            Logout
+          </button>
+          <Link
+              href={Routes.SCORE}
+              className={styles.headerButton}
+              aria-label="Go to score page"
+          >
+            Scores
           </Link>
           <button
             className={styles.headerButton}

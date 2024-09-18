@@ -29,7 +29,8 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="bg-background peer block w-full shadow-custom-shadow border border-[1px] border-bright-gold rounded-md py-[9px] pl-10 text-sm outline-2 placeholder:text-muted-gold"
+                autoComplete='off'
+                className="bg-background peer block w-full shadow-custom-shadow border border-[1px] border-bright-gold rounded-md py-[9px] pl-10 text-lg outline-2  placeholder:text-muted-gold"
                 id="email"
                 type="email"
                 name="email"
@@ -48,7 +49,8 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="bg-background peer block w-full shadow-custom-shadow border border-[1px] border-bright-gold rounded-md py-[9px] pl-10 text-sm outline-2 placeholder:text-muted-gold"
+                autoComplete='off'
+                className="bg-background peer block w-full shadow-custom-shadow border border-[1px] border-bright-gold rounded-md py-[9px] pl-10 text-lg outline-2 placeholder:text-muted-gold"
                 id="password"
                 type="password"
                 name="password"

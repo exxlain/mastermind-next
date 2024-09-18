@@ -20,7 +20,10 @@ input,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
+  transition:
+          color calc(infinity * 1s) step-end,
+          background-color calc(infinity * 1s) step-end;
   -webkit-box-shadow: 0 0 50px rgba(255, 255, 255, 0) inset !important;
-  background-color: transparent !important;
-  background-clip: text;
+  background-color: transparent;
+  color: var(--bright-gold);
 }

@@ -20,6 +20,7 @@
   border-right: 4px ridge var(--muted-gold);
   border-bottom: 4px groove var(--muted-gold);
   box-shadow: var(--shadow);
+  padding: 0 15px;
 }
 .headerButton:hover {
   background-color: var(--bright-gold);

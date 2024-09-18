@@ -12,8 +12,11 @@ const config: Config = {
         "bright-gold": "var(--bright-gold)",
         "muted-gold": "var(--muted-gold)",
         "dark-red": "var(--dark-red)",
-        background: "var(----background)",
-        shadow: "var(--shadow)"
+        "bright-red": "var(--bright-red)",
+        background: "var(----background)"
+      },
+      boxShadow: {
+        'custom-shadow': "var(--shadow)",
       },
     },
   },

@@ -1,4 +1,4 @@
-import LoginForm from '@/app/components/login-form';
+import LoginForm from '@/app/components/LoginForm';
 import {Metadata} from "next";
 import {SrcLinks} from '@routes';
 import Image from "next/image";
@@ -11,6 +11,8 @@ export default function LoginPage() {
                     <div className="">
                         <Image
                             src={SrcLinks.BULL}
+                            width={100}
+                            height={100}
                             alt="logo"
                             className="size-16 md:size-24"
                         />

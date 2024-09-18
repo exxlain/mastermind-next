@@ -6,6 +6,7 @@
   --bright-gold: #DBA338;
   --muted-gold: #C3883E;
   --dark-red: #471107;
+  --bright-red: #811f0d;
   --background: #654837;
   --shadow: inset 0px 0px 5px 3px rgba(1,1,1,0.3);
 }
@@ -14,4 +15,12 @@ body {
   color: var(--bright-gold);
   background: var(--background);
   line-height: normal;
+}
+input,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 50px rgba(255, 255, 255, 0) inset !important;
+  background-color: transparent !important;
+  background-clip: text;
 }

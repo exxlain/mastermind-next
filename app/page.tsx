@@ -11,7 +11,7 @@ export default function Page() {
             </p>
             <Link
                 href={Routes.LOGIN}
-                className="flex items-center gap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-gold text-2xl sm:text-3xl"
+                className="flex items-center gap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl "
             >
               <span>Sign in</span>
             </Link>

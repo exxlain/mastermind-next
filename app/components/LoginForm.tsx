@@ -9,7 +9,6 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 //@ts-ignore
 import { useFormState } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
-import styles from './LoginForm.module.css'
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useFormState(

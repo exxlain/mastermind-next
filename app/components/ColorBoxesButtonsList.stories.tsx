@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {Provider} from "react-redux";
@@ -43,3 +44,4 @@ AllRight.args = {
   colors: [BoxColor.BROWN, BoxColor.GREEN, BoxColor.GREEN, BoxColor.GOLD, BoxColor.GREEN],
   selectColor: pushColorToCurrentPuzzle,
 };
+*/

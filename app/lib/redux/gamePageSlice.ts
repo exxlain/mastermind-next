@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { puzzleItemsCleared, emptyElement } from '@/app/lib/constants';
-import type { RootState } from '@/app/store';
+import type { RootState } from '@/app/lib/redux/store';
 import checkResult from '@/app/helpers/checkResult';
 import findEmptyElementIndex from '@/app/helpers/findEmptyElementIndex';
 
@@ -57,12 +57,12 @@ const gamePageSlice = createSlice({
   },
 });
 
-export const currentSequence = (state: RootState) => state.gamePage.currentSequence;
-export const sequences = (state: RootState) => state.gamePage.sequences;
-export const results = (state: RootState) => state.gamePage.results;
-export const victory = (state: RootState) => state.gamePage.victory;
-export const  puzzleSequence = (state: RootState) => state.gamePage.puzzleSequence;
-export const  isGameStarted = (state: RootState) => state.gamePage.isGameStarted;
+export const currentSequence = (state: RootState) => state.currentSequence;
+export const sequences = (state: RootState) => state.sequences;
+export const results = (state: RootState) => state.results;
+export const victory = (state: RootState) => state.victory;
+export const  puzzleSequence = (state: RootState) => state.puzzleSequence;
+export const  isGameStarted = (state: RootState) => state.isGameStarted;
 
 
 export const {

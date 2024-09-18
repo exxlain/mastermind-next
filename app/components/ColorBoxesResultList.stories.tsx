@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ColorBoxesResultList from './ColorBoxesResultList';
@@ -38,3 +39,4 @@ AllRight.args = {
   colors: [BoxColor.BROWN, BoxColor.GREEN, BoxColor.GREEN,BoxColor.GOLD, BoxColor.GREEN],
   results: [2,2,2,2,2],
 };
+*/

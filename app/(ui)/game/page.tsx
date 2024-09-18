@@ -100,7 +100,7 @@ export default function Page() {
         </section>
         <section className={styles.results}>
           <p className={styles.resultsText}>Your results:</p>
-          {currentSequences.map((sequence, index)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
+          {currentSequences.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
         </section>
       </div>
      </>

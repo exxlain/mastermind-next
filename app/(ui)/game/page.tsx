@@ -15,7 +15,7 @@ import {
   resetResults,
   victory,
   puzzleSequence,
- // resetPuzzle,
+  resetPuzzle,
   startGame,
 } from '@/app/lib/redux/gamePageSlice';
 import { puzzleItemsVariants } from '@/app/lib/constants';
@@ -34,7 +34,6 @@ import {signOutAction} from "@/app/lib/actions";
 
 export default function Page() {
   const dispatch: AppDispatch = useAppDispatch();
-  //const navigate =  useNavigate();
   const puzzleFromGame = useAppSelector(puzzleSequence);
   const currentSequenceSelection = useAppSelector(currentSequence);
   const currentSequences = useAppSelector(sequences);
@@ -42,27 +41,23 @@ export default function Page() {
   const victoryState = useAppSelector(victory);
 
   useEffect(()=>{
-    console.log('Effect is running');
-    const puzzleSequence = generatePuzzle();
-    dispatch(startGame(puzzleSequence));
+      const puzzleSequence = generatePuzzle();
+      dispatch(startGame(puzzleSequence));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onCheckButtonClick = ()=>{
+    dispatch(saveResult(puzzleFromGame));
     if (currentSequenceSelection.join() === puzzleFromGame.join()){
       dispatch(getVictory());
+      //save score to db
     }
-    dispatch(saveResult(puzzleFromGame));
   };
   const onRestartButtonClick = ()=>{
     dispatch(resetResults());
+    const puzzleSequence = generatePuzzle();
+    dispatch(startGame(puzzleSequence));
   };
-/*  const onBackButtonClick = ()=>{
-    сделать это на score
-    dispatch(resetResults());
-    dispatch(resetPuzzle());
-    navigate(Routes.HOME);
-  };*/
 
   return (
     <>
@@ -74,6 +69,8 @@ export default function Page() {
               aria-label="Logout"
               onClick={async () => {
                 await signOutAction();
+                dispatch(resetResults());
+                dispatch(resetPuzzle());
               }}
           >
             Logout
@@ -94,7 +91,7 @@ export default function Page() {
           </button>
         </header>
         <section className={styles.selectVariantsWrapper}>
-          {<ColorBoxesButtonsList colors={puzzleItemsVariants} selectColor={pushColorToCurrentPuzzle}/>}
+          {<ColorBoxesButtonsList colors={puzzleItemsVariants} selectColor={pushColorToCurrentPuzzle} isVictory={victoryState}/>}
           {<ColorBoxesSelectedList colors={currentSequenceSelection} clearSelectedPlace={clearSelectedPlace}/>}
         </section>
         <section className={styles.checkInfoWrapper}>
@@ -110,7 +107,7 @@ export default function Page() {
         </section>
         <section className={styles.results}>
           <p className={styles.resultsText}>Your results:</p>
-          {currentSequences.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
+          {currentSequences?.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
         </section>
       </div>
      </>

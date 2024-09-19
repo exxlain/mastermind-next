@@ -51,13 +51,10 @@
   box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
 }
 
-.checkButton:active{
-  background: radial-gradient(circle, #ec6a6a, #e52b2b);
-  box-shadow: 0px 0 5px 5px rgba(255,255,255,0.2)
-}
 .checkButton:disabled {
   color: var(--muted-gold);
   border-color: var(--muted-gold);
+  background: none;
 }
 .selectVariantsWrapper {
   border: 1px solid var(--bright-gold);

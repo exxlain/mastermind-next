@@ -1,50 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import gamePageReducer from './gamePageSlice';
-import {
- // persistReducer,
-/*  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,*/
-} from 'redux-persist';
-//import storage from 'redux-persist/lib/storage';
 
-
-/*
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  whitelist: ['gamePage'],
-  storage,
-};
-*/
-
-
-/*
-export interface IAppState {
-  gamePage: GamePageState,
-}
-*/
-
-/*
-export const rootReducer =  combineReducers<IAppState>({
-  gamePage: gamePageReducer,
-});
-*/
-
-//const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const makeStore = () => {
   return configureStore({
     reducer: gamePageReducer,
-/*    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-          serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-          },
-        }),*/
   })
 }
 

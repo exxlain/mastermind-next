@@ -6,14 +6,15 @@ import { AnyAction } from '@reduxjs/toolkit';
 interface IColorBoxesButtonsListProps {
   colors: Array<string>;
   selectColor: (color: string) => AnyAction;
+  isVictory: boolean;
 }
 
-const ColorBoxesButtonsList : React.FC<IColorBoxesButtonsListProps> = ({ colors, selectColor }) =>{
+const ColorBoxesButtonsList : React.FC<IColorBoxesButtonsListProps> = ({ colors, selectColor, isVictory }) =>{
   return (
     <div className={styles.colorsList}>
       {colors.map(currentColor =>
         (ColorBoxButton(
-          { color: `${currentColor}`,  selectColor: selectColor },
+          { color: `${currentColor}`,  selectColor: selectColor, isVictory },
         )))}
     </div>
   );

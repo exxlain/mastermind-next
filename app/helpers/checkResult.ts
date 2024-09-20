@@ -1,4 +1,4 @@
-const checkResult = (puzzleSequence: Array<string>, currentSequence: Array<string>): Array<string> =>{
+const checkResult = (puzzleSequence: Array<string>, currentSequence: Array<string>): Array<number> =>{
   const resultArr: Array<number> =  [];
   const newPuzzle: Map<string, number> =  new Map();
   const newCurrent: Map<string, number> =  new Map();

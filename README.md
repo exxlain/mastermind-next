@@ -14,9 +14,9 @@ pnpm dev
 - React
 - [Typescript](https://www.typescriptlang.org/)
 - [Redux toolkit](https://redux-toolkit.js.org/usage/nextjs)
-- [next/font](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
 - [Tailwind](https://tailwindcss.com)
-- E2E test
-- Eslint
-- ErrorBoundary
+WIP:
 - CI for deploy prod and staging (linter, ts, storybook, tests)
+- E2E test
+- ErrorBoundary
+

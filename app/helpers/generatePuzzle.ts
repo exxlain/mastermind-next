@@ -2,7 +2,7 @@ import { puzzleItemsVariants, puzzleLength } from '@/app/lib/constants';
 
 const getRandomInt = ()=> Math.floor(Math.random() * puzzleLength);
 
-const generatePuzzle = ()=>{
+const generatePuzzle = (): Array<string>=>{
   return puzzleItemsVariants.map(()=> puzzleItemsVariants[getRandomInt()]);
 };
 

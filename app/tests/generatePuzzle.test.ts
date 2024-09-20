@@ -7,7 +7,7 @@ describe('generatePuzzle', ()=>{
 
   test('should have array of string', () => {
     expect(generatePuzzle()).toEqual(
-    expect.arrayContaining([expect.any(String)]),
+      expect.arrayContaining([expect.any(String)]),
     );
   });
 });

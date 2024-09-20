@@ -15,15 +15,15 @@ const ColorBoxButton : React.FC<IColorBoxButtonProps> = ({ color, selectColor, i
   const dispatch = useAppDispatch();
 
   return (
-     <button
-       className={styles.box}
-       onClick={() => (dispatch(selectColor(color)))}
-       style={{ backgroundColor: `${color}` }}
-       key={nanoid()}
-       disabled={isVictory}
-     >
-       {colorSymbolMap[color as keyof typeof colorSymbolMap]}
-     </button>
+    <button
+      className={styles.box}
+      onClick={() => (dispatch(selectColor(color)))}
+      style={{ backgroundColor: `${color}` }}
+      key={nanoid()}
+      disabled={isVictory}
+    >
+      {colorSymbolMap[color as keyof typeof colorSymbolMap]}
+    </button>
   );
 };
 

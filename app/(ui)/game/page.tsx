@@ -42,16 +42,16 @@ export default function Page() {
   const victoryState = useAppSelector(victory);
   const [iterations, setIterations] = useState(0);
   const [time, setTime] = useState(0);
-  let timeIntervId:ReturnType<typeof setInterval>;
+
 
   useEffect(()=>{
-      const puzzleSequence = generatePuzzle();
-      dispatch(startGame(puzzleSequence));
+    const puzzleSequence = generatePuzzle();
+    dispatch(startGame(puzzleSequence));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(()=>{
-    timeIntervId = setInterval(()=>{setTime(prevTime => prevTime + 1)}, 1000)
+    const timeIntervId:ReturnType<typeof setInterval> = setInterval(()=>{setTime(prevTime => prevTime + 1)}, 1000)
     return () => {
       clearInterval(timeIntervId)
     }
@@ -79,29 +79,29 @@ export default function Page() {
       <div className={styles.page}>
         <header className={styles.header}>
           <button
-              className={styles.headerButton}
-              aria-label="Try again"
-              onClick={onRestartButtonClick}
+            className={styles.headerButton}
+            aria-label="Try again"
+            onClick={onRestartButtonClick}
           >
             restart
           </button>
           <div>inerations: {iterations}</div>
           <div className={styles.timeContainer}>time: {convertTimeForScreen(time)}</div>
           <Link
-              href={Routes.SCORE}
-              className={styles.headerButton}
-              aria-label="Go to score page"
+            href={Routes.SCORE}
+            className={styles.headerButton}
+            aria-label="Go to score page"
           >
             scores
           </Link>
           <button
-              className={styles.headerButton}
-              aria-label="Logout"
-              onClick={async () => {
-                await signOutAction();
-                dispatch(resetResults());
-                dispatch(resetPuzzle());
-              }}
+            className={styles.headerButton}
+            aria-label="Logout"
+            onClick={async () => {
+              await signOutAction();
+              dispatch(resetResults());
+              dispatch(resetPuzzle());
+            }}
           >
             logout
           </button>
@@ -111,21 +111,21 @@ export default function Page() {
           {<ColorBoxesSelectedList colors={currentSequenceSelection} clearSelectedPlace={clearSelectedPlace}/>}
         </section>
         <section className={styles.checkInfoWrapper}>
-        <button
-          className={styles.checkButton}
-          aria-label="Check your sequence"
-          onClick={onCheckButtonClick}
-          disabled={findEmptyElementIndex(currentSequenceSelection) !== -1}
-        >
+          <button
+            className={styles.checkButton}
+            aria-label="Check your sequence"
+            onClick={onCheckButtonClick}
+            disabled={findEmptyElementIndex(currentSequenceSelection) !== -1}
+          >
           Check
-        </button>
-        <Info/>
+          </button>
+          <Info/>
         </section>
         <section className={styles.results}>
           <p className={styles.resultsText}>Your results:</p>
           {currentSequences?.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
         </section>
       </div>
-     </>
+    </>
   );
 }

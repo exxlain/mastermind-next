@@ -9,11 +9,11 @@ interface IResultBoxProps {
 
 const ResultBox : React.FC<IResultBoxProps> = ({ result }) =>{
   return (
-     <div
-       className={styles.box}
-       key={nanoid()}
-       style={{ backgroundColor: `${getColorForResultBox(result)}` }}
-     />
+    <div
+      className={styles.box}
+      key={nanoid()}
+      style={{ backgroundColor: `${getColorForResultBox(result)}` }}
+    />
   );
 };
 

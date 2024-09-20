@@ -12,8 +12,8 @@ import { authenticate } from '@/app/lib/actions';
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useFormState(
-      authenticate,
-      undefined,
+    authenticate,
+    undefined,
   );
 
   return (
@@ -66,13 +66,13 @@ export default function LoginForm() {
           Log in <ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
         </button>
         <div className="flex h-8 items-end space-x-1"
-             aria-live="polite"
-             aria-atomic="true">
+          aria-live="polite"
+          aria-atomic="true">
           {errorMessage && (
-              <>
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                <p className="text-sm text-red-500">{errorMessage}</p>
-              </>
+            <>
+              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+              <p className="text-sm text-red-500">{errorMessage}</p>
+            </>
           )}
         </div>
       </div>

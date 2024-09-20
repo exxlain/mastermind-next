@@ -1,5 +1,5 @@
 'use client';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { nanoid } from 'nanoid';
 //import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/lib/redux/hooks';
@@ -30,6 +30,7 @@ import Info from '@/app/components/Info';
 import styles from './GamePage.module.css';
 import Link from 'next/link';
 import {signOutAction} from "@/app/lib/actions";
+import convertTimeForScreen from "@/app/helpers/convertTimeForScreen"
 
 
 export default function Page() {
@@ -39,6 +40,9 @@ export default function Page() {
   const currentSequences = useAppSelector(sequences);
   const currentResults = useAppSelector(results);
   const victoryState = useAppSelector(victory);
+  const [iterations, setIterations] = useState(0);
+  const [time, setTime] = useState(0);
+  let timeIntervId:ReturnType<typeof setInterval>;
 
   useEffect(()=>{
       const puzzleSequence = generatePuzzle();
@@ -46,7 +50,15 @@ export default function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(()=>{
+    timeIntervId = setInterval(()=>{setTime(prevTime => prevTime + 1)}, 1000)
+    return () => {
+      clearInterval(timeIntervId)
+    }
+  },)
+
   const onCheckButtonClick = ()=>{
+    setIterations(iterations+1)
     dispatch(saveResult(puzzleFromGame));
     if (currentSequenceSelection.join() === puzzleFromGame.join()){
       dispatch(getVictory());
@@ -55,8 +67,10 @@ export default function Page() {
   };
   const onRestartButtonClick = ()=>{
     dispatch(resetResults());
+    setIterations(0)
     const puzzleSequence = generatePuzzle();
     dispatch(startGame(puzzleSequence));
+    setTime(0)
   };
 
   return (
@@ -66,6 +80,22 @@ export default function Page() {
         <header className={styles.header}>
           <button
               className={styles.headerButton}
+              aria-label="Try again"
+              onClick={onRestartButtonClick}
+          >
+            restart
+          </button>
+          <div>inerations: {iterations}</div>
+          <div className={styles.timeContainer}>time: {convertTimeForScreen(time)}</div>
+          <Link
+              href={Routes.SCORE}
+              className={styles.headerButton}
+              aria-label="Go to score page"
+          >
+            scores
+          </Link>
+          <button
+              className={styles.headerButton}
               aria-label="Logout"
               onClick={async () => {
                 await signOutAction();
@@ -73,21 +103,7 @@ export default function Page() {
                 dispatch(resetPuzzle());
               }}
           >
-            Logout
-          </button>
-          <Link
-              href={Routes.SCORE}
-              className={styles.headerButton}
-              aria-label="Go to score page"
-          >
-            Scores
-          </Link>
-          <button
-            className={styles.headerButton}
-            aria-label="Try again"
-            onClick={onRestartButtonClick}
-          >
-            Restart
+            logout
           </button>
         </header>
         <section className={styles.selectVariantsWrapper}>

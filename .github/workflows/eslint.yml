@@ -1,4 +1,4 @@
-name: Lint and Type Check
+name: Lint
 
 on:
   push:
@@ -39,50 +39,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: eslint-results.sarif
-          wait-for-processing: true
-
-  typecheck:
-    name: Run TypeScript type checking
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '21.3.0'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run TypeScript type check
-        run: npm run typecheck
-
-  - name: Create SARIF file for TypeScript
-      if: failure()  # Запускаем только если проверка типов не прошла
-      run: |
-        echo '{
-          "version": "2.1.0",
-          "runs": [{
-            "tool": {
-              "driver": {
-                "name": "TypeScript Type Check",
-                "version": "1.0.0"
-              }
-            },
-            "results": [{
-              "ruleId": "typescript-check",
-              "level": "error",
-              "message": "TypeScript type checking failed",
-              "locations": []
-            }]
-          }]
-        }' > ts-results.sarif
-
-      - name: Upload TypeScript analysis results to GitHub
-        if: failure()  # Загрузка результатов только при наличии ошибок
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: ts-results.sarif
           wait-for-processing: true

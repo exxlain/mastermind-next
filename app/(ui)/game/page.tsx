@@ -29,7 +29,7 @@ import Fireworks from '@/app/components/Fireworks/Fireworks';
 import Info from '@/app/components/Info';
 import styles from './GamePage.module.css';
 import Link from 'next/link';
-import {signOutAction} from "@/app/lib/actions";
+import {signOutAction, saveGameResult} from "@/app/lib/actions";
 import convertTimeForScreen from "@/app/helpers/convertTimeForScreen"
 
 
@@ -57,12 +57,19 @@ export default function Page() {
     }
   },)
 
-  const onCheckButtonClick = ()=>{
+  const onCheckButtonClick =async ()=>{
     setIterations(iterations+1)
     dispatch(saveResult(puzzleFromGame));
-    if (currentSequenceSelection.join() === puzzleFromGame.join()){
+    if (currentSequenceSelection.join() === puzzleFromGame.join()) {
       dispatch(getVictory());
       //save score to db
+      try {
+        const user_id = '1'
+        await saveGameResult({ iterations, used_time: time, user_id });
+        console.log('Score saved successfully');
+      } catch (error) {
+        console.error('Error saving score:', error);
+      }
     }
   };
   const onRestartButtonClick = ()=>{

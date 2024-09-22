@@ -51,9 +51,13 @@ export default function Page() {
   }, [])
 
   useEffect(()=>{
-    const timeIntervId:ReturnType<typeof setInterval> = setInterval(()=>{setTime(prevTime => prevTime + 1)}, 1000)
-    return () => {
-      clearInterval(timeIntervId)
+    if(!victoryState) {
+      const timeIntervId: ReturnType<typeof setInterval> = setInterval(() => {
+        setTime(prevTime => prevTime + 1)
+      }, 1000)
+      return () => {
+        clearInterval(timeIntervId)
+      }
     }
   },)
 

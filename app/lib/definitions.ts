@@ -10,5 +10,5 @@ export type Score = {
   id: string;
   iterations: number;
   used_time: number;
-  user_id: string,
+  user_name: string,
 };

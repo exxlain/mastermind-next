@@ -1,5 +1,5 @@
 import {sql} from '@vercel/postgres';
-import {Score,} from './definitions';
+import {Score} from './definitions';
 
 
 export async function fetchScores() {
@@ -10,7 +10,7 @@ export async function fetchScores() {
         scores.date,
         scores.iterations,
         scores.used_time,
-        users.id AS user_id
+        users.name AS user_name
       FROM scores
       JOIN users ON scores.user_id = users.id
       ORDER BY scores.date DESC

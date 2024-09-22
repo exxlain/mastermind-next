@@ -1,10 +1,9 @@
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 //import {fetchScores} from "@/app/lib/data";
 import {scores} from '@/app/lib/placeholder-data'
 
 export default async function Scores() {
-  //const scores = await fetchScores();
+  // const scores = await fetchScores();
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className= "mb-4 text-xl md:text-2xl">
@@ -41,10 +40,6 @@ export default async function Scores() {
               </div>
             );
           })}
-        </div>
-        <div className="flex items-center pb-2 pt-6">
-          <ArrowPathIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
         </div>
       </div>
     </div>

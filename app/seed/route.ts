@@ -43,6 +43,13 @@ async function seedScores() {
      );
    `;
 
+  await client.sql`
+     ALTER TABLE scores
+     ADD CONSTRAINT fk_user
+     FOREIGN KEY (user_id) REFERENCES users(id)
+     ON DELETE CASCADE;
+  `;
+
   const insertedScores = await Promise.all(
     scores.map(
       (score) => client.sql`

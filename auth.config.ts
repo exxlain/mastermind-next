@@ -9,7 +9,8 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnGamePage = nextUrl.pathname.startsWith(Routes.GAME);
-      if (isOnGamePage) {
+      const isOnScorePage = nextUrl.pathname.startsWith(Routes.SCORE);
+      if (isOnGamePage || isOnScorePage) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {

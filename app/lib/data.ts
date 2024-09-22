@@ -11,9 +11,9 @@ export async function fetchScores() {
         id,
         date,
         iterations,
-        used_time,
+        used_time
       FROM scores
-      JOIN customers ON invoices.customer_id = customers.id
+      JOIN users ON scores.user_id = users.id
       ORDER BY scores.date DESC
     `;
 

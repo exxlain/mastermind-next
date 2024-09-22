@@ -62,10 +62,10 @@ export default function Page() {
     dispatch(saveResult(puzzleFromGame));
     if (currentSequenceSelection.join() === puzzleFromGame.join()) {
       dispatch(getVictory());
-      //save score to db
       try {
-        const user_id = '1'
-        await saveGameResult({ iterations, used_time: time, user_id });
+        const user_id = '410544b2-4001-4271-9855-fec4b6a6442a'
+        const currentIterations = iterations + 1
+        await saveGameResult({ iterations: currentIterations, used_time: time, user_id });
         console.log('Score saved successfully');
       } catch (error) {
         console.error('Error saving score:', error);

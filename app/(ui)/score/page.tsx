@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import {fetchScores} from "@/app/lib/data";
 
+export const revalidate = 0
 export default async function Scores() {
   const scores = await fetchScores();
-
   const formatDate=(date: string)=>{
     const fullDate= new Date(date);
     return fullDate.toISOString().split('T')[0];

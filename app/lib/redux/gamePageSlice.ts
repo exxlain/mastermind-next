@@ -49,9 +49,6 @@ const gamePageSlice = createSlice({
     },
     getVictory: (state)=>{
       state.victory = true;
-    },
-    resetPuzzle: (state)=>{
-      state.puzzleSequence = [];
       state.isGameStarted = false;
     },
   },
@@ -72,7 +69,6 @@ export const {
   resetResults,
   getVictory,
   startGame,
-  resetPuzzle,
 } = gamePageSlice.actions;
 
 export default gamePageSlice.reducer;

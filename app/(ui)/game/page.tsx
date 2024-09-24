@@ -15,8 +15,8 @@ import {
   resetResults,
   victory,
   puzzleSequence,
-  resetPuzzle,
   startGame,
+  isGameStarted,
 } from '@/app/lib/redux/gamePageSlice';
 import { puzzleItemsVariants } from '@/app/lib/constants';
 import generatePuzzle from '@/app/helpers/generatePuzzle';
@@ -40,18 +40,13 @@ export default function Page() {
   const currentSequences = useAppSelector(sequences);
   const currentResults = useAppSelector(results);
   const victoryState = useAppSelector(victory);
+  const isStarted = useAppSelector(isGameStarted);
   const [iterations, setIterations] = useState(0);
   const [time, setTime] = useState(0);
 
 
   useEffect(()=>{
-    const puzzleSequence = generatePuzzle();
-    dispatch(startGame(puzzleSequence));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(()=>{
-    if(!victoryState) {
+    if(!victoryState && isStarted) {
       const timeIntervId: ReturnType<typeof setInterval> = setInterval(() => {
         setTime(prevTime => prevTime + 1)
       }, 1000)
@@ -94,9 +89,9 @@ export default function Page() {
             aria-label="Try again"
             onClick={onRestartButtonClick}
           >
-            restart
+            {isStarted ? 'restart' : 'start'}
           </button>
-          <div>inerations: {iterations}</div>
+          <div>iterations: {iterations}</div>
           <div className={styles.timeContainer}>time: {convertTimeForScreen(time)}</div>
           <Link
             href={Routes.SCORE}
@@ -111,7 +106,6 @@ export default function Page() {
             onClick={async () => {
               await signOutAction();
               dispatch(resetResults());
-              dispatch(resetPuzzle());
             }}
           >
             logout

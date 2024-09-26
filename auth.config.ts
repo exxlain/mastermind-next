@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import type { NextAuthConfig } from 'next-auth';
 import { Routes } from '@routes';
 
@@ -6,19 +8,29 @@ export const authConfig = {
     signIn: Routes.LOGIN,
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    authorized({ auth, request: { nextUrl }  }) {
       const isLoggedIn = !!auth?.user;
       const isOnGamePage = nextUrl.pathname.startsWith(Routes.GAME);
       const isOnScorePage = nextUrl.pathname.startsWith(Routes.SCORE);
       if (isOnGamePage || isOnScorePage) {
         if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+        return false;
       } else if (isLoggedIn) {
         const newUrl = new URL(Routes.GAME, nextUrl)
         return Response.redirect(newUrl);
       }
       return true;
     },
+    jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+      }
+      return token
+    },
+    session({ session, token }) {
+      session.user.id = token.id
+      return session
+    },
   },
-  providers: [], // Add providers with an empty array for now
+  providers: [],
 } satisfies NextAuthConfig;

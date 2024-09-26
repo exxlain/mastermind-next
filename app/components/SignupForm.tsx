@@ -2,24 +2,42 @@
 import {
   AtSymbolIcon,
   KeyIcon,
-  ExclamationCircleIcon,
+  UserIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
-import { useFormState } from 'react-dom';
-import { authenticate } from '@/app/lib/actions';
+import {useFormState} from 'react-dom';
+import {signupUser} from '@/app/lib/actions';
 
-export default function LoginForm() {
-  const [errorMessage, formAction, isPending] = useFormState(
-    authenticate,
-    undefined,
-  );
-
+export default function SignupForm() {
+  const [state, formAction] = useFormState(signupUser, undefined);
   return (
     <form action={formAction} className="text-2xl shadow-custom-shadow border border-[1px] border-bright-gold rounded-md">
       <div className="flex-1 rounded-lg px-6 pb-4 pt-8">
         <div className="w-full">
+          <div>
+            <label
+              className="mb-3 mt-5 block text-2xl font-medium"
+              htmlFor="name"
+            >
+              Name
+            </label>
+            <div className="relative">
+              <input
+                autoComplete='off'
+                className="bg-background peer block w-full shadow-custom-shadow border border-[1px] border-dark-red rounded-md py-[9px] pl-10 text-lg outline-2  placeholder:text-muted-gold"
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+              />
+              <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-gold peer-focus:text-muted-gold" />
+            </div>
+          </div>
+          {state?.errors?.name && <p className="text-base text-red-600">{state.errors.name}</p>}
+
           <div>
             <label
               className="mb-3 mt-5 block text-2xl font-medium"
@@ -40,6 +58,8 @@ export default function LoginForm() {
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-gold peer-focus:text-muted-gold" />
             </div>
           </div>
+          {state?.errors?.email && <p className="text-base text-red-600">{state.errors.email}</p>}
+
           <div className="mt-4">
             <label
               className="mb-3 mt-5 block text-2xl font-medium text-2xl"
@@ -61,20 +81,20 @@ export default function LoginForm() {
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-gold peer-focus:text-muted-gold" />
             </div>
           </div>
-        </div>
-        <button className="bg-dark-red hover:bg-bright-red relative py-[8px] pl-10 pr-6 flex mt-12 w-full shadow-custom-shadow  rounded-md" aria-disabled={isPending}>
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
-        </button>
-        <div className="flex h-8 items-end space-x-1"
-          aria-live="polite"
-          aria-atomic="true">
-          {errorMessage && (
-            <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
+          {state?.errors?.password && (
+            <div>
+              <p>Password must:</p>
+              <ul>
+                {state.errors.password.map((error: string) => (
+                  <li key={error} className="text-base text-red-600">- {error}</li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
+        <button className="bg-dark-red hover:bg-bright-red relative py-[8px] pl-10 pr-6 flex mt-12 w-full shadow-custom-shadow  rounded-md">
+          Sign up <ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
+        </button>
       </div>
     </form>
   );

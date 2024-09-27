@@ -6,9 +6,9 @@ export default function Page() {
     <main className="flex min-h-screen flex-col p-6 min-w-96">
       <div className="mt-16 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-10 rounded-lg px-6 py-10 md:px-20">
-          <p className={`text-3xl sm:text-5xl md:leading-normal`}>
+          <h1 className={`text-3xl sm:text-5xl md:leading-normal`}>
             <strong>Welcome to Mastermind game</strong>
-          </p>
+          </h1>
           <section className="flex">
             <Link
               href={Routes.LOGIN}

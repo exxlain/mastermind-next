@@ -15,8 +15,7 @@ pnpm dev
 - [Typescript](https://www.typescriptlang.org/)
 - [Redux toolkit](https://redux-toolkit.js.org/usage/nextjs)
 - [Tailwind](https://tailwindcss.com)
-WIP:
-- CI for deploy prod and staging (linter, ts, storybook, tests)
-- E2E test
+- github actions
+- E2E test ([Playwright](https://playwright.dev/))
+ WIP:
 - ErrorBoundary
-

@@ -25,7 +25,7 @@ jobs:
         run: pnpm install
 
       - name: Start Next.js server
-        run: pnpm run start &
+        run: pnpm dev &
         env:
           PORT: 3000
 

@@ -9,6 +9,8 @@ jobs:
     name: Run PlayWright (e2e)
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

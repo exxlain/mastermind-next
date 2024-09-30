@@ -63,7 +63,7 @@ export default function LoginForm() {
           </div>
         </div>
         <button className="bg-dark-red hover:bg-bright-red relative py-[8px] pl-10 pr-6 flex mt-12 w-full shadow-custom-shadow  rounded-md" aria-disabled={isPending}>
-          Log in <ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
+          Sign in <ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
         </button>
         <div className="flex h-8 items-end space-x-1"
           aria-live="polite"

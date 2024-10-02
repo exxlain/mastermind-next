@@ -1,9 +1,30 @@
-import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import { NextRequest, NextResponse } from 'next/server';
+import { decrypt } from '@/app/lib/session';
+import { cookies } from 'next/headers';
+import {Routes} from '@/app/lib/routes'
 
-export default NextAuth(authConfig).auth;
+const protectedRoutes = [Routes.GAME, Routes.SCORE];
+const publicRoutes = [Routes.HOME, Routes.LOGIN, Routes.SIGNUP];
 
-export const config = {
-    // https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
-};
+export default async function middleware(req: NextRequest) {
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = protectedRoutes.includes(path as Routes);
+  const isPublicRoute = publicRoutes.includes(path as Routes);
+
+  const cookie = cookies().get('session')?.value;
+  const session = await decrypt(cookie);
+
+  if (isProtectedRoute && !session?.userId) {
+    return NextResponse.redirect(new URL(Routes.LOGIN, req.nextUrl));
+  }
+
+  if (
+    isPublicRoute &&
+        session?.userId &&
+        !req.nextUrl.pathname.startsWith(Routes.GAME)
+  ) {
+    return NextResponse.redirect(new URL(Routes.GAME, req.nextUrl));
+  }
+
+  return NextResponse.next();
+}

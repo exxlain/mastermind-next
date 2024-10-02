@@ -1,34 +1,9 @@
 'use server';
-import {signIn, signOut} from '@/auth';
-import {AuthError} from 'next-auth';
 import { sql } from '@vercel/postgres';
-import {SignupFormSchema, FormState} from '@/app/lib/definitions'
+import {SignupFormSchema, FormState, LoginFormSchema} from '@/app/lib/definitions'
 import bcrypt from 'bcrypt';
-import { redirect } from 'next/navigation'
-import {Routes} from "@routes";
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-    await signIn('credentials', formData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-      case 'CredentialsSignin':
-        return 'Invalid credentials.';
-      default:
-        return 'Something went wrong.';
-      }
-    }
-    throw error;
-  }
-}
-
-export async function signOutAction() {
-  await signOut();
-}
+import {createSession, deleteSession} from "@/app/lib/session";
+import prisma from '@/lib/prisma';
 
 export async function saveGameResult({ iterations, used_time, user_id }: { iterations: number, used_time: number, user_id: string }) {
   try  {
@@ -42,7 +17,6 @@ export async function saveGameResult({ iterations, used_time, user_id }: { itera
     };
   }
 }
-
 
 export async function signupUser(state: FormState, formData: FormData) {
   const name =  formData.get('name');
@@ -69,31 +43,63 @@ export async function signupUser(state: FormState, formData: FormData) {
   const saltRounds = 11
   const hashedPassword = await bcrypt.hash(password as string, saltRounds);
 
-  try  {
-    await sql`
-      INSERT INTO users (name, email, password)
-      VALUES (${name}, ${email}, ${hashedPassword})
-    `;
+  const user = await prisma.users.create({
+    data: {
+      name: name,
+      email: email,
+      password: hashedPassword,
+    },
+  });
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-    });
+  await createSession(user.id)
 
-    if (result && 'error' in result) {
-      return {
-        message: 'Login after signup failed.',
-      };
-    }
+}
 
-    return { success: true };
-
-  } catch (error) {
-    console.error('Error during signup:', error)
+export async function login(
+  state: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  const email =  formData.get('email');
+  const password =  formData.get('password');
+  if (typeof email !== 'string' || typeof password !== 'string') {
     return {
-      message: 'Database Error: Failed to Sign up a new user.',
+      message: 'Invalid input values.',
     };
-  } finally {
-    redirect(Routes.GAME);
+  };
+
+  const validatedFields = LoginFormSchema.safeParse({
+    email: email,
+    password: password,
+  });
+  const errorMessage = { message: 'Invalid login credentials.' };
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
   }
+
+  const user = await prisma.users.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  if (!user) {
+    return errorMessage;
+  }
+  const passwordMatch = await bcrypt.compare(
+    validatedFields.data.password,
+    user.password,
+  );
+
+  if (!passwordMatch) {
+    return errorMessage;
+  }
+
+  const userId = user.id.toString();
+  await createSession(userId);
+}
+
+export async function logout() {
+  deleteSession();
 }

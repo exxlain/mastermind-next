@@ -1,12 +1,18 @@
-import {auth} from '@/auth';
 import Game from './(page)'
-import { redirect } from 'next/navigation';
+import {verifySession} from '@/app/lib/session'
+import {redirect} from "next/navigation";
 import {Routes} from "@routes";
 
 export default async function Page() {
-  const session = await auth()
-  if(!session){
-    redirect(Routes.LOGIN)
+  const session = await verifySession();
+
+  if (session) {
+    const currentUserId = session.userId;
+
+    if (typeof currentUserId === 'string') {
+      return <Game userId={currentUserId} />;
+    }
   }
-  return (<Game session={session}/>)
+
+  redirect(Routes.LOGIN);
 }

@@ -11,11 +11,12 @@ pnpm dev
 ## Used in project
 
 - [Next.js](https://nextjs.org)
-- React
+- [React](https://react.dev/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Redux toolkit](https://redux-toolkit.js.org/usage/nextjs)
 - [Tailwind](https://tailwindcss.com)
-- github actions
+- [github actions CI](https://github.com/features/actions)
+- [Prisma ORM](https://www.prisma.io/)
 - E2E test ([Playwright](https://playwright.dev/))
  WIP:
 - ErrorBoundary

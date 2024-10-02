@@ -3,13 +3,11 @@ import {fetchScores} from "@/app/lib/data";
 import formatDate from '@/app/helpers/formatDate'
 import Link from "next/link";
 import {Routes} from "@routes";
-//import {auth} from '@/auth';
 
 export const revalidate = 0
 
 export default async function Scores() {
   const scores = await fetchScores();
-  //const session = await auth()
   const tableElement = (info: string | number, width: string)=>{
     return (
       <div className={`flex items-center justify-center w-${width}`}>
@@ -55,7 +53,7 @@ export default async function Scores() {
                   },
                 )}
               >
-                {tableElement(score.user_name, '1/5')}
+                {tableElement(score.user.name, '1/5')}
                 {tableElement(score.used_time, '1/5')}
                 {tableElement(score.iterations, '1/5')}
                 {tableElement(formatDate(score.date), '2/5')}

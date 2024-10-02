@@ -11,7 +11,7 @@ import {useFormState} from 'react-dom';
 import {signupUser} from '@/app/lib/actions';
 
 export default function SignupForm() {
-  const [state, formAction] = useFormState(signupUser, undefined);
+  const [state, formAction, pending] = useFormState(signupUser);
   return (
     <form action={formAction} className="text-2xl shadow-custom-shadow border border-[1px] border-bright-gold rounded-md">
       <div className="flex-1 rounded-lg px-6 pb-4 pt-8">
@@ -31,7 +31,6 @@ export default function SignupForm() {
                 type="text"
                 name="name"
                 placeholder="Enter your name"
-                required
               />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-gold peer-focus:text-muted-gold" />
             </div>
@@ -53,7 +52,6 @@ export default function SignupForm() {
                 type="email"
                 name="email"
                 placeholder="Enter your email address"
-                required
               />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-gold peer-focus:text-muted-gold" />
             </div>
@@ -75,8 +73,6 @@ export default function SignupForm() {
                 type="password"
                 name="password"
                 placeholder="Enter password"
-                required
-                minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-muted-gold peer-focus:text-muted-gold" />
             </div>
@@ -93,7 +89,7 @@ export default function SignupForm() {
           )}
         </div>
         <button className="bg-dark-red hover:bg-bright-red relative py-[8px] pl-10 pr-6 flex mt-12 w-full shadow-custom-shadow  rounded-md">
-          Sign up <ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
+          {pending ? 'Submitting...' : ' Sign up'}<ArrowRightIcon className="ml-auto h-5 w-5 absolute right-4 top-1/3" />
         </button>
       </div>
     </form>

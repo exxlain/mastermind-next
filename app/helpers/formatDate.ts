@@ -1,4 +1,4 @@
-const formatDate=(date: string)=>{
+const formatDate=(date: Date ): string=>{
   const fullDate = new Date(date);
   const options = {
     year: 'numeric',

@@ -28,15 +28,13 @@ import Fireworks from '@/app/components/Fireworks/Fireworks';
 import Info from '@/app/components/Info';
 import styles from './GamePage.module.css';
 import Link from 'next/link';
-import {signOutAction, saveGameResult} from "@/app/lib/actions";
+import {logout, saveGameResult} from "@/app/lib/actions";
 import convertTimeForScreen from "@/app/helpers/convertTimeForScreen"
-import {Session} from 'next-auth'
 
-interface ISession {
-  session: Session,
+interface GameProps {
+  userId: string;
 }
-
-function Game(session: ISession) {
+function Game({ userId }: GameProps) {
   const dispatch: AppDispatch = useAppDispatch();
   const puzzleFromGame = useAppSelector(puzzleSequence);
   const currentSequenceSelection = useAppSelector(currentSequence);
@@ -47,8 +45,6 @@ function Game(session: ISession) {
   const [iterations, setIterations] = useState(0);
   const [time, setTime] = useState(0);
 
-
-  const user_id = session?.session?.user?.id;
 
   useEffect(()=>{
     if(!victoryState && isStarted) {
@@ -68,8 +64,8 @@ function Game(session: ISession) {
       dispatch(getVictory());
       try {
         const currentIterations = iterations + 1
-        if(user_id){
-          await saveGameResult({ iterations: currentIterations, used_time: time, user_id });
+        if(userId){
+          await saveGameResult({ iterations: currentIterations, used_time: time, user_id: userId });
           console.log('Score saved successfully');
         }
       } catch (error) {
@@ -110,7 +106,7 @@ function Game(session: ISession) {
             className={styles.headerButton}
             aria-label="Logout"
             onClick={async () => {
-              await signOutAction();
+              await logout();
               dispatch(resetResults());
             }}
           >

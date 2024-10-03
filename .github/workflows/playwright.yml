@@ -13,6 +13,8 @@ jobs:
       AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
       DATABASE_URL: ${{ secrets.POSTGRES_URL }}
     steps:
+      - name: Check environment variables
+        run: printenv | grep POSTGRES_URL
       - name: Checkout code
         uses: actions/checkout@v4
 

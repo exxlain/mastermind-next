@@ -15,8 +15,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          node-version: '21.3.0'
+      - name: Install pnpm
+        run: npm install -g pnpm
       - run: pnpm install
       - uses: chromaui/action@v1
         with:

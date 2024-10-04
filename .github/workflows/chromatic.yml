@@ -16,8 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'yarn'
-      - run: yarn
+          cache: 'pnpm'
+      - run: pnpm install
       - uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

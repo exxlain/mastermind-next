@@ -126,6 +126,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.6
         version: 18.2.6
+      chromatic:
+        specifier: ^11.11.0
+        version: 11.11.0
       css-loader:
         specifier: ^7.1.2
         version: 7.1.2(webpack@5.95.0(esbuild@0.23.1))

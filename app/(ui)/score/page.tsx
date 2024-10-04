@@ -1,7 +1,8 @@
 import {fetchScores} from "@/app/lib/data";
-import formatDate from '@/app/helpers/formatDate'
 import Link from "next/link";
 import {Routes} from "@routes";
+import convertTimeForScreen from "@/app/helpers/convertTimeForScreen";
+import DateFormatter from "@/app/components/DateFormatter";
 
 export const revalidate = 0
 
@@ -41,9 +42,9 @@ export default async function Scores() {
                   key={score.id}
                 >
                   <td className="golden-border text-muted-gold p-2">{score.user.name}</td>
-                  <td className="golden-border text-muted-gold p-2">{score.used_time}</td>
+                  <td className="golden-border text-muted-gold p-2">{convertTimeForScreen(score.used_time)}</td>
                   <td className="golden-border text-muted-gold p-2">{score.iterations}</td>
-                  <td className="golden-border text-muted-gold p-2">{formatDate(score.date)}</td>
+                  <td className="golden-border text-muted-gold p-2"><DateFormatter date={score.date} /></td>
                 </tr>
               );
             })}

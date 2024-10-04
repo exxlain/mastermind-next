@@ -1,47 +1,42 @@
-/*
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import {Provider} from "react-redux";
-import {store} from "../../app/store";
+import type { Meta, StoryObj } from '@storybook/react';
 import ColorBoxesButtonsList from './ColorBoxesButtonsList';
-import { pushColorToCurrentPuzzle } from '../GamePage/gamePageSlice';
-import { BoxColor } from '../../app/lib/constants';
+import { pushColorToCurrentPuzzle } from '@/app/lib/redux/gamePageSlice';
+import { BoxColor } from '@/app/lib/constants';
+import {boolean} from "zod";
 
-export default {
+const meta = {
   title: 'ColorBoxesButtonsList',
   component: ColorBoxesButtonsList,
   decorators: [
     (Story) => (
-        <Provider store={store}>
-          <div style={{ maxWidth: '650px' }}>
-            <Story />
-          </div>
-        </Provider>
+      <div style={{ maxWidth: '650px' }}>
+        <Story />
+      </div>
     ),
   ],
   argTypes: {
     colors: Array,
-    results: Array,
+    selectColor: ()=>{},
+    isVictory: boolean,
   },
-} as ComponentMeta<typeof ColorBoxesButtonsList>;
+} satisfies Meta<typeof ColorBoxesButtonsList>;
 
-const Template: ComponentStory<typeof ColorBoxesButtonsList> = (args) => <ColorBoxesButtonsList {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  colors: [BoxColor.BROWN, BoxColor.BLUE, BoxColor.GREEN, BoxColor.GOLD, BoxColor.WHITE],
-  selectColor: pushColorToCurrentPuzzle,
+export const OneColor: Story = {
+  args: {
+    colors: [BoxColor.BROWN, BoxColor.BROWN, BoxColor.BROWN, BoxColor.BROWN, BoxColor.BROWN],
+    selectColor: pushColorToCurrentPuzzle,
+    isVictory: false,
+  },
 };
 
-export const ALWrong = Template.bind({});
-ALWrong.args = {
-  colors: [BoxColor.BLUE, BoxColor.BLUE, BoxColor.GREEN, BoxColor.GREEN, BoxColor.WHITE],
-  selectColor: pushColorToCurrentPuzzle,
+export const DifferentColors: Story = {
+  args: {
+    colors: [BoxColor.BLUE, BoxColor.BROWN, BoxColor.GOLD, BoxColor.GREEN, BoxColor.WHITE],
+    selectColor: pushColorToCurrentPuzzle,
+    isVictory: false,
+  },
 };
-
-export const AllRight = Template.bind({});
-AllRight.args = {
-  colors: [BoxColor.BROWN, BoxColor.GREEN, BoxColor.GREEN, BoxColor.GOLD, BoxColor.GREEN],
-  selectColor: pushColorToCurrentPuzzle,
-};
-*/

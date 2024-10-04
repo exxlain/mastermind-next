@@ -1,42 +1,44 @@
-/*
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ColorBoxesResultList from './ColorBoxesResultList';
 import { BoxColor } from '@/app/lib/constants';
+import type { Meta, StoryObj } from '@storybook/react';
 
-export default {
+
+const meta = {
   title: 'ColorBoxesResultList',
   component: ColorBoxesResultList,
   decorators: [
     (Story) => (
-        <div style={{ maxWidth: '650px' }}>
-          <Story />
-        </div>
+      <div style={{ maxWidth: '650px' }}>
+        <Story />
+      </div>
     ),
   ],
   argTypes: {
     colors: Array,
     results: Array,
   },
-} as ComponentMeta<typeof ColorBoxesResultList>;
+} satisfies Meta<typeof ColorBoxesResultList>;
 
-const Template: ComponentStory<typeof ColorBoxesResultList> = (args) => <ColorBoxesResultList {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  colors: [BoxColor.BROWN, BoxColor.BLUE, BoxColor.GREEN,BoxColor.GOLD, BoxColor.WHITE],
-  results: [2,1,0,0,0],
+export default meta;
+type Story = StoryObj<typeof meta>;
+export const Mixed: Story = {
+  args: {
+    colors: [BoxColor.BROWN, BoxColor.BLUE, BoxColor.GREEN, BoxColor.GOLD, BoxColor.WHITE],
+    results: [2, 1, 0, 0, 0],
+  },
 };
 
-export const ALWrong = Template.bind({});
-ALWrong.args = {
-  colors: [BoxColor.BLUE, BoxColor.BLUE, BoxColor.GREEN, BoxColor.GREEN, BoxColor.WHITE],
-  results: [0,0,0,0,0],
+export const ALWrong: Story = {
+  args: {
+    colors: [BoxColor.BLUE, BoxColor.BLUE, BoxColor.GREEN, BoxColor.GREEN, BoxColor.WHITE],
+    results: [0, 0, 0, 0, 0],
+  },
 };
 
-export const AllRight = Template.bind({});
-AllRight.args = {
-  colors: [BoxColor.BROWN, BoxColor.GREEN, BoxColor.GREEN,BoxColor.GOLD, BoxColor.GREEN],
-  results: [2,2,2,2,2],
+export const AllRight: Story = {
+  args: {
+    colors: [BoxColor.BROWN, BoxColor.GREEN, BoxColor.GREEN, BoxColor.GOLD, BoxColor.GREEN],
+    results: [2, 2, 2, 2, 2],
+  },
 };
-*/

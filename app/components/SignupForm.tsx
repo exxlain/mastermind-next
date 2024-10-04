@@ -14,7 +14,7 @@ export default function SignupForm() {
   const [state, formAction, pending] = useFormState(signupUser, undefined);
   return (
     <form action={formAction} className="text-2xl shadow-custom-shadow border border-[1px] border-bright-gold rounded-md">
-      <div className="flex-1 rounded-lg px-6 pb-4 pt-8">
+      <div className="flex-1 rounded-lg px-6 pb-6">
         <div className="w-full">
           <div>
             <label

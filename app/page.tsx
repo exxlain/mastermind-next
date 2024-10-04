@@ -12,13 +12,13 @@ export default function Page() {
           <section className="flex">
             <Link
               href={Routes.LOGIN}
-              className="flex items-centergap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl "
+              className="flex items-centergap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl shadow-custom-shadow"
             >
               <span>Sign in</span>
             </Link>
             <Link
               href={Routes.SIGNUP}
-              className="flex items-center mx-4 gap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl "
+              className="flex items-center mx-4 gap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl shadow-custom-shadow"
             >
               <span>Sign up</span>
             </Link>

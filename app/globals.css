@@ -27,3 +27,7 @@ input:-webkit-autofill:focus {
   background-color: transparent;
   color: var(--bright-gold);
 }
+
+.golden-border {
+  @apply border border-[1px] border-bright-gold shadow-custom-shadow;
+}

@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import {fetchScores} from "@/app/lib/data";
 import formatDate from '@/app/helpers/formatDate'
 import Link from "next/link";
@@ -8,60 +7,49 @@ export const revalidate = 0
 
 export default async function Scores() {
   const scores = await fetchScores();
-  const tableElement = (info: string | number, width: string)=>{
-    return (
-      <div className={`flex items-center justify-center w-${width}`}>
-        <p className="truncate text-sm font-semibold md:text-base">
-          {info}
-        </p>
-      </div>
-    )
-  }
 
   return (
     <div className="py-6 flex fle w-full flex-col md:col-span-4">
-      <h2 className= "text-center text-3xl md:text-2xl">
-            Scores
-      </h2>
-      <div className="w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto flex rounded-xl py-2">
-        <Link
-          href={Routes.GAME}
-          className="flex items-center gap-5 self-start rounded-lg bg-dark-red px-3 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-xl sm:text-2xl "
-        >
-          <span>back to game</span>
-        </Link>
-
-      </div>
-      <div className="w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto flex flex-col justify-between rounded-xl bg-gray-50 p-4">
-        <div className="bg-white px-6">
-          <div
-            className={'flex flex-row items-center justify-between py-4border-t py-3 text-dark-red'}
+      <section className='flex items-center w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto px-3'>
+        <h2 className="text-3xl flex-grow">
+              Scores
+        </h2>
+        <div className='my-5'>
+          <Link
+            href={Routes.GAME}
           >
-            {tableElement('User name', '1/5')}
-            {tableElement('Time', '1/5')}
-            {tableElement('Iterations', '1/5')}
-            {tableElement('Date', '2/5')}
-          </div>
-          {scores.map((score, i) => {
-            return (
-              <div
-                key={score.id}
-                className={clsx(
-                  'flex flex-row items-center justify-between py-4',
-                  {
-                    'border-t': i !== 0,
-                  },
-                )}
-              >
-                {tableElement(score.user.name, '1/5')}
-                {tableElement(score.used_time, '1/5')}
-                {tableElement(score.iterations, '1/5')}
-                {tableElement(formatDate(score.date), '2/5')}
-              </div>
-            );
-          })}
+            <span className="text-2xl bg-dark-red hover:bg-bright-red  px-[8px] py-[8px] shadow-custom-shadow rounded-md">back to game</span>
+          </Link>
         </div>
-      </div>
+      </section>
+      <section className="w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto overflow-hidden rounded-md">
+        <table className="table-auto w-full">
+          <thead
+            className={'text-dark-red bg-muted-gold'}
+          >
+            <tr>
+              <th className="text-left golden-border p-3">User name</th>
+              <th className="text-left golden-border p-3">Time</th>
+              <th className="text-left golden-border p-3">Iterations</th>
+              <th className="text-left golden-border p-3">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {scores.map((score) => {
+              return (
+                <tr
+                  key={score.id}
+                >
+                  <td className="golden-border text-muted-gold p-2">{score.user.name}</td>
+                  <td className="golden-border text-muted-gold p-2">{score.used_time}</td>
+                  <td className="golden-border text-muted-gold p-2">{score.iterations}</td>
+                  <td className="golden-border text-muted-gold p-2">{formatDate(score.date)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }

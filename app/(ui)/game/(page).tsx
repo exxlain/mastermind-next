@@ -93,8 +93,10 @@ function Game({ userId }: GameProps) {
           >
             {isStarted ? 'restart' : 'start'}
           </button>
-          <div>iterations: {iterations}</div>
-          <div className={styles.timeContainer}>time: {convertTimeForScreen(time)}</div>
+          <div className={styles.scoresWrapper}>
+            <div className={styles.scoresItem}>iterations: {iterations}</div>
+            <div className={styles.scoresItem}>time: {convertTimeForScreen(time)}</div>
+          </div>
           <Link
             href={Routes.SCORE}
             className={styles.headerButton}

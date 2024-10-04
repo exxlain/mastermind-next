@@ -81,6 +81,11 @@
   margin: 10px 0;
 }
 
-.timeContainer{
-  width: 150px;
+.scoresWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.scoresItem {
+  padding: 3px;
 }

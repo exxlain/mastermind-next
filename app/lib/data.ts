@@ -12,6 +12,7 @@ export async function fetchScores() {
         user: {
           select: {
             name: true,
+            id: true,
           },
         },
       },

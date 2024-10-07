@@ -12,7 +12,18 @@ export type Score = {
   id: string;
   iterations: number;
   used_time: number;
-  user_name: string,
+  user_id: string,
+};
+
+export type ScoreForScreen = {
+  date: Date;
+  id: string;
+  iterations: number;
+  used_time: number;
+  user: {
+    name: string,
+    id: string,
+  },
 };
 
 export const SignupFormSchema = z.object({

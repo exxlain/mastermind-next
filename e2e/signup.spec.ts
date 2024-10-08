@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import prisma from '@/lib/prisma';
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test.describe('signUp page', () => {
   const account = { name: 'Lana', email: '11user@nextmail.com', password: '1qwerty!' };
   const accountWrongFields = { name: '', email: '', password: '' };

@@ -82,13 +82,14 @@ function Game({ userId }: GameProps) {
   };
 
   return (
-    <>
+    <main>
+      <h1 className='sr-only'>Game Page</h1>
       {victoryState && <Fireworks/>}
       <div className={styles.page}>
         <header className={styles.header}>
           <button
             className={styles.headerButton}
-            aria-label="Try again"
+            aria-label="Start"
             onClick={onRestartButtonClick}
           >
             {isStarted ? 'restart' : 'start'}
@@ -135,7 +136,7 @@ function Game({ userId }: GameProps) {
           {currentSequences?.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
         </section>
       </div>
-    </>
+    </main>
   );
 }
 

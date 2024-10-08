@@ -21,6 +21,7 @@ const ColorBoxButton : React.FC<IColorBoxButtonProps> = ({ color, selectColor, i
       style={{ backgroundColor: `${color}` }}
       key={nanoid()}
       disabled={isVictory}
+      aria-label={`select ${color} color`}
     >
       {colorSymbolMap[color as keyof typeof colorSymbolMap]}
     </button>

@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test.describe('welcome page', () => {
   test.beforeEach('Open start URL',async ({ page }) => {
     await page.goto('./')

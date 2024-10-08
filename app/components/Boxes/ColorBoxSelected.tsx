@@ -20,6 +20,7 @@ const ColorBoxSelected : React.FC<IColorBoxSelectedProps> = ({ color, clearSelec
       onClick={() => (dispatch(clearSelectedPlace(index)))}
       style={{ backgroundColor: `${color === 'none' ? 'transparent' : color}` }}
       key={nanoid()}
+      aria-label={`selected ${color} color`}
     >
       {colorSymbolMap[color as keyof typeof colorSymbolMap]}
     </button>

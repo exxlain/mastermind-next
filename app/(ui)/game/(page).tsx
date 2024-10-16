@@ -83,7 +83,7 @@ function Game({ userId }: GameProps) {
 
   return (
     <main>
-      <h1 className='sr-only'>Game Page</h1>
+      <h1 className='sr-only entry-title'>Game Page</h1>
       {victoryState && <Fireworks/>}
       <div className={styles.page}>
         <header className={styles.header}>

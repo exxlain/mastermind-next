@@ -2,15 +2,24 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test.describe('game page', () => {
-  test.beforeEach('Open game URL',async ({ page }) => {
-    await page.goto('./game')
+  test.beforeEach('Open game URL',async ({ page, browserName }) => {
+    console.log('browserName', browserName)
+    if(browserName==='webkit'){
+      await page.goto('./login');
+      const account = { email: 'user1@nextmail.com', password: '1123456' };
+      await page.getByLabel('Email').fill(account.email);
+      await page.getByLabel('Password').fill(account.password);
+      await page.getByRole('button', { name: 'Sign in' }).click();
+      await page.waitForURL('./game');
+    } else {
+      await page.goto('./game')
+    }
   });
 
   test('has all elements', async ({ page }) => {
     const logoutButton = page.getByRole('button', { name: 'logout' });
     await expect(logoutButton).toBeVisible();
     await expect(logoutButton).toBeEnabled();
-
     const startButton = page.getByLabel('Start');
     await expect(startButton).toBeVisible();
     await expect(startButton).toBeEnabled();

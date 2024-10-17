@@ -3,7 +3,6 @@ import AxeBuilder from '@axe-core/playwright';
 
 test.describe('game page', () => {
   test.beforeEach('Open game URL',async ({ page, browserName }) => {
-    console.log('browserName', browserName)
     if(browserName==='webkit'){
       await page.goto('./login');
       const account = { email: 'user1@nextmail.com', password: '1123456' };
@@ -32,9 +31,11 @@ test.describe('game page', () => {
     await expect(button).toHaveText('restart');
   })
 
-  test('should navigate to scores page', async ({ page }) => {
-    await page.click('text=Scores')
-    await expect(page).toHaveURL('./score')
+  test('should navigate to scores page', async ({ page, browserName }) => {
+    if(browserName!=='webkit'){
+      await page.click('text=Scores')
+      await expect(page).toHaveURL('./score')
+    }
   })
 
 

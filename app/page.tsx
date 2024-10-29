@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { Routes } from '@routes';
+import DarkButton from "@/app/components/Buttons/DarkButton/DarkButton";
 
 export default function Page() {
   return (
@@ -10,18 +10,8 @@ export default function Page() {
             <strong>Welcome to Mastermind game</strong>
           </h1>
           <section className="flex">
-            <Link
-              href={Routes.LOGIN}
-              className="flex items-centergap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl shadow-custom-shadow"
-            >
-              <span>Sign in</span>
-            </Link>
-            <Link
-              href={Routes.SIGNUP}
-              className="flex items-center mx-4 gap-5 self-start rounded-lg bg-dark-red px-6 py-3 font-medium text-muted-gold transition-colors hover:bg-bright-red text-2xl sm:text-3xl shadow-custom-shadow"
-            >
-              <span>Sign up</span>
-            </Link>
+            <DarkButton route={Routes.LOGIN} title={'Sign in'} px={6} py={3}/>
+            <DarkButton route={Routes.SIGNUP} title={'Sign up'} px={6} py={3}/>
           </section>
         </div>
       </div>

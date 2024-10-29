@@ -9,16 +9,14 @@ const meta = {
   component: DarkButton,
   decorators: [
     (Story) => (
-      <main className="flex min-h-screen flex-col p-6 min-w-96">
-        <section className="flex">
-          <Story />
-        </section>
-      </main>
+      <Story />
     ),
   ],
   argTypes: {
-    colors: Array,
-    results: Array,
+    route: string,
+    title: string,
+    px: number,
+    py: number,
   },
 } satisfies Meta<typeof DarkButton>;
 

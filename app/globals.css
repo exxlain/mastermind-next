@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Castlemar';
-  src: url('app/fonts/CastlemarRegular.otf') format('opentype');
+  src: url('../app/fonts/CastlemarRegular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }

@@ -12,12 +12,6 @@ const meta = {
       <Story />
     ),
   ],
-  argTypes: {
-    route: string,
-    title: string,
-    px: number,
-    py: number,
-  },
 } satisfies Meta<typeof DarkButton>;
 
 export default meta;

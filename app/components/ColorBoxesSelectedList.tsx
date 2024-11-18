@@ -8,7 +8,7 @@ interface IColorBoxesSelectedListProps {
   clearSelectedPlace: (color: number) => AnyAction;
 }
 
-const ColorBoxesSelectedList : React.FC<IColorBoxesSelectedListProps> = ({ colors, clearSelectedPlace }) =>{
+const ColorBoxesSelectedList : React.FC<IColorBoxesSelectedListProps> = React.memo(({ colors, clearSelectedPlace }) =>{
   return (
     <div className={styles.colorsList}>
       {colors?.map((currentColor, index) =>
@@ -17,6 +17,8 @@ const ColorBoxesSelectedList : React.FC<IColorBoxesSelectedListProps> = ({ color
         )))}
     </div>
   );
-};
+});
+
+ColorBoxesSelectedList.displayName = 'ColorBoxesSelectedList';
 
 export default ColorBoxesSelectedList;

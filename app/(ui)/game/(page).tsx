@@ -1,5 +1,5 @@
 'use client';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import { nanoid } from 'nanoid';
 import { useAppDispatch, useAppSelector } from '@/app/lib/redux/hooks';
 import { AppDispatch } from '@/app/lib/redux/store';
@@ -133,7 +133,7 @@ function Game({ userId }: GameProps) {
         </section>
         <section className={styles.results}>
           <p className={styles.resultsText}>Your results:</p>
-          {currentSequences?.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>))}
+          {useMemo(() => currentSequences?.map((sequence: Array<string>, index: number)=>(<ColorBoxesResultList colors={sequence} results={currentResults[index]} key={nanoid()}/>)), [currentSequences, currentResults])}
         </section>
       </div>
     </main>

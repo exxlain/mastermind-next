@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Info.module.css';
 import ResultBox from './Boxes/ResultBox';
 
-const Info: React.FC = ()=>{
+const Info: React.FC = React.memo(()=>{
   return (
     <ul className={styles.infoSection}>
       <li className={styles.infoCase}>
@@ -19,6 +19,8 @@ const Info: React.FC = ()=>{
       </li>
     </ul>
   );
-};
+});
+
+Info.displayName = 'Info';
 
 export default Info;

@@ -9,7 +9,7 @@ interface IColorBoxesButtonsListProps {
   isVictory: boolean;
 }
 
-const ColorBoxesButtonsList : React.FC<IColorBoxesButtonsListProps> = ({ colors, selectColor, isVictory }) =>{
+const ColorBoxesButtonsList : React.FC<IColorBoxesButtonsListProps> = React.memo(({ colors, selectColor, isVictory }) =>{
   return (
     <div className={styles.colorsList}>
       {colors.map(currentColor =>
@@ -18,6 +18,8 @@ const ColorBoxesButtonsList : React.FC<IColorBoxesButtonsListProps> = ({ colors,
         )))}
     </div>
   );
-};
+});
+
+ColorBoxesButtonsList.displayName = 'ColorBoxesButtonsList';
 
 export default ColorBoxesButtonsList;

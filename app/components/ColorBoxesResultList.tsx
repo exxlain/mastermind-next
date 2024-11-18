@@ -8,7 +8,7 @@ interface IColorBoxesListProps {
   results: Array<number>;
 }
 
-const ColorBoxesResultList : React.FC<IColorBoxesListProps> = ({ colors, results }) =>{
+const ColorBoxesResultList : React.FC<IColorBoxesListProps> = React.memo(({ colors, results }) =>{
   return (
     <div className={styles.resultItem}>
       <div className={styles.colorsList}>
@@ -19,6 +19,8 @@ const ColorBoxesResultList : React.FC<IColorBoxesListProps> = ({ colors, results
       </div>
     </div>
   );
-};
+});
+
+ColorBoxesResultList.displayName = 'ColorBoxesResultList';
 
 export default ColorBoxesResultList;

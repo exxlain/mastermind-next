@@ -19,6 +19,3 @@ pnpm dev
 - [Prisma ORM](https://www.prisma.io/)
 - E2E test ([Playwright](https://playwright.dev/))
 - [Storybook](https://storybook.js.org/) (link for: [deployed build](https://670015e350c5cf2da8b33e88-tacnsxwpxw.chromatic.com/))
- 
-- WIP:
-- ErrorBoundary

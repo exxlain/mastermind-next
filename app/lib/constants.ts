@@ -23,3 +23,5 @@ export const colorSymbolMap = {
   [BoxColor.GOLD]: 'X',
   [BoxColor.WHITE]: 'Q',
 };
+
+export const numberOfAnimationElements = 30;

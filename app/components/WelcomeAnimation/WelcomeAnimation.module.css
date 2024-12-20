@@ -1,0 +1,96 @@
+.container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 50px auto;
+  border-radius: 50%;
+}
+
+.sword {
+  will-change: transform;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  animation: rotateAround 3s linear infinite;
+}
+.sword2 {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform-origin: top center;
+  animation: rotateAround 3s linear infinite;
+}
+.sword3 {
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform-origin: top center;
+  animation: rotateAround 3s linear infinite;
+}
+
+.blade {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 75px;
+  background: linear-gradient(to bottom, silver, gray);
+  border-radius: 1px;
+}
+
+.blade::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 5px solid silver;
+}
+
+.guard {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 7.5px;
+  background: var(--bright-gold);
+  border-radius: 2.5px;
+}
+
+.handle {
+  position: absolute;
+  top: 82.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 30px;
+  background: black;
+  border-radius: 1px;
+}
+
+.pommel {
+  position: absolute;
+  top: 112.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--bright-gold);
+  border-radius: 50%;
+}
+
+@keyframes rotateAround {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

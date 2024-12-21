@@ -22,7 +22,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '21.3.0'
-
+      - name: Check if pnpm store exists
+        run: ls -al ~/.pnpm-store
+        
       - name: Cache pnpm store
         uses: actions/cache@v4
         with:

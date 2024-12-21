@@ -1,9 +1,11 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 jobs:
   test:
     name: Run PlayWright (e2e)
@@ -20,6 +22,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '21.3.0'
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install pnpm
         run: npm install -g pnpm

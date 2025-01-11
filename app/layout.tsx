@@ -20,6 +20,9 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
+        <head>
+          <meta name="google-site-verification" content="lyUQZjfrYJVNOXEpYTAl66KHRsJn67BlMmCHKvd0Crs" />
+        </head>
         <body className={`${Castlemar.className} antialiased`}>
           {children}
         </body>

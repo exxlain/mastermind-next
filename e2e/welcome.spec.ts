@@ -32,7 +32,6 @@ test.describe('welcome page', () => {
   test('should not have any automatically detectable accessibility issues', async ({ page }) => {
     await page.waitForLoadState('networkidle')
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
-    console.log(accessibilityScanResults, 'accessibilityScanResults')
     expect(accessibilityScanResults.violations).toEqual([]);
   });
 

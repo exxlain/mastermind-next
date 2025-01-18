@@ -21,7 +21,12 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <head>
+          <meta charSet={'UTF-8'} />
           <meta name="google-site-verification" content="lyUQZjfrYJVNOXEpYTAl66KHRsJn67BlMmCHKvd0Crs" />
+          <title>Mastermind</title>
+          <meta name={'description'} content={"mastermind game"} />
+          <meta property={"og:description"} content={"logic game"}/>
+          <meta property={"og:image"} content={"public/mastermind.webp"}/>
         </head>
         <body className={`${Castlemar.className} antialiased`}>
           {children}

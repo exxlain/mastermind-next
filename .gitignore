@@ -47,3 +47,4 @@ node_modules/
 storybook-static
 
 playwright/.auth
+.nyc_output/*

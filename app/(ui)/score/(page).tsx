@@ -20,7 +20,6 @@ function Scores({scores, currentUserId}: ScoresPops) {
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>)=>{
     setAllUsersFiltering(evt.target.value  as 'allUsers' | 'onlyMe')
   }
-
   const filteredScores = allUsersFiltering ==='allUsers' ? scores : filterScores(scores, currentUserId)
   return (
     <div className="flex fle w-full flex-col md:col-span-4">
@@ -41,7 +40,7 @@ function Scores({scores, currentUserId}: ScoresPops) {
         </div>
       </section>
       <section className="w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto overflow-hidden rounded-md">
-        <table className="table-auto w-full">
+        {filteredScores?.length ? (<table className="table-auto w-full">
           <thead
             className={'text-dark-red bg-muted-gold'}
           >
@@ -66,7 +65,7 @@ function Scores({scores, currentUserId}: ScoresPops) {
               );
             })}
           </tbody>
-        </table>
+        </table>) : (<h2>No scores available</h2>)}
       </section>
     </div>
   );

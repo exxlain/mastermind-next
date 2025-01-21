@@ -17,6 +17,8 @@ pnpm dev
 - [github actions CI](https://github.com/features/actions)
 - [Prisma ORM](https://www.prisma.io/)
 - E2E test ([Playwright](https://playwright.dev/))
+- [Jest](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/)
 - [Storybook](https://storybook.js.org/) (link for: [deployed build](https://670015e350c5cf2da8b33e88-tacnsxwpxw.chromatic.com/))
 
 

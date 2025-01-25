@@ -62,3 +62,15 @@ test('handles missing or undefined scores gracefully', () => {
 
   expect(screen.getByText('No scores available')).toBeInTheDocument();
 });
+
+
+test('loading time Scores screen', async () => {
+  const start = performance.now();
+  render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
+  const end = performance.now();
+  const renderTime = end - start
+  console.log(`Component rendered in ${renderTime}ms`);
+
+  expect(renderTime).toBeLessThanOrEqual(100);
+
+})

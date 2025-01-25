@@ -18,7 +18,7 @@ const meta = {
   argTypes: {
     colors: Array,
     selectColor: ()=>{},
-    isVictory: boolean,
+    disabled: boolean,
   },
 } satisfies Meta<typeof ColorBoxesButtonsList>;
 
@@ -29,7 +29,7 @@ export const OneColor: Story = {
   args: {
     colors: [BoxColor.BROWN, BoxColor.BROWN, BoxColor.BROWN, BoxColor.BROWN, BoxColor.BROWN],
     selectColor: pushColorToCurrentPuzzle,
-    isVictory: false,
+    disabled: false,
   },
 };
 
@@ -37,6 +37,6 @@ export const DifferentColors: Story = {
   args: {
     colors: [BoxColor.BLUE, BoxColor.BROWN, BoxColor.GOLD, BoxColor.GREEN, BoxColor.WHITE],
     selectColor: pushColorToCurrentPuzzle,
-    isVictory: false,
+    disabled: false,
   },
 };

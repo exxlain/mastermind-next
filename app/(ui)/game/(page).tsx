@@ -117,7 +117,7 @@ function Game({ userId }: GameProps) {
           </button>
         </header>
         <section className={styles.selectVariantsWrapper}>
-          {<ColorBoxesButtonsList colors={puzzleItemsVariants} selectColor={pushColorToCurrentPuzzle} isVictory={victoryState}/>}
+          {<ColorBoxesButtonsList colors={puzzleItemsVariants} selectColor={pushColorToCurrentPuzzle} disabled={victoryState || !isStarted}/>}
           {<ColorBoxesSelectedList colors={currentSequenceSelection} clearSelectedPlace={clearSelectedPlace}/>}
         </section>
         <section className={styles.checkInfoWrapper}>

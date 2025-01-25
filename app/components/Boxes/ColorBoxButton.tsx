@@ -8,10 +8,10 @@ import { colorSymbolMap } from '@/app/lib/constants';
 interface IColorBoxButtonProps {
   color: string;
   selectColor: (color: string) => AnyAction;
-  isVictory: boolean;
+  disabled: boolean;
 }
 
-const ColorBoxButton : React.FC<IColorBoxButtonProps> = ({ color, selectColor, isVictory }) =>{
+const ColorBoxButton : React.FC<IColorBoxButtonProps> = ({ color, selectColor, disabled }) =>{
   const dispatch = useAppDispatch();
 
   return (
@@ -20,7 +20,7 @@ const ColorBoxButton : React.FC<IColorBoxButtonProps> = ({ color, selectColor, i
       onClick={() => (dispatch(selectColor(color)))}
       style={{ backgroundColor: `${color}` }}
       key={nanoid()}
-      disabled={isVictory}
+      disabled={disabled}
       aria-label={`select ${color} color`}
     >
       {colorSymbolMap[color as keyof typeof colorSymbolMap]}

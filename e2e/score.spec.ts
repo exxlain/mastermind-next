@@ -10,7 +10,7 @@ test.describe('scores page', () => {
 
       const endTime = Date.now();
       const loadTime = endTime - startTime;
-      console.log(`Page load time (manual measurement): ${loadTime}ms`);
+      console.log(`scores page load time (manual measurement): ${loadTime}ms`);
 
       await expect(page).toHaveURL('./score');
 
@@ -27,7 +27,7 @@ test.describe('scores page', () => {
       await page.waitForTimeout(500);
 
       const performanceMetrics = await page.evaluate(() => {
-        const [navigation] = performance.getEntriesByType('navigation');
+        const [navigation] = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
         return {
           loadTime: navigation.loadEventEnd,
           domContentLoaded: navigation.domContentLoadedEventEnd,

@@ -22,9 +22,9 @@ function Scores({scores, currentUserId}: ScoresPops) {
   }
   const filteredScores = allUsersFiltering ==='allUsers' ? scores : filterScores(scores, currentUserId)
   return (
-    <div className="flex fle w-full flex-col md:col-span-4">
+    <main className="flex fle w-full flex-col md:col-span-4">
       <section className='flex items-center w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto px-3'>
-        <h2 className="text-3xl pr-6">Scores</h2>
+        <h1 className="text-3xl pr-6">Scores</h1>
         <fieldset className="text-ml flex-grow">
           <div className='my-5'>
             <input onChange={handleChange} className='mr-2' id='all users' type="radio" name='filter' value={'allUsers'} checked={allUsersFiltering==='allUsers'}/>
@@ -42,10 +42,10 @@ function Scores({scores, currentUserId}: ScoresPops) {
       <section className="w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto overflow-hidden rounded-md">
         {filteredScores?.length ? (<table className="table-auto w-full">
           <thead
-            className={'text-dark-red bg-muted-gold'}
+            className={'text-dark-red bg-bright-gold'}
           >
             <tr>
-              <th className="text-left golden-border p-3">User name</th>
+              <th className="text-left golden-border p-3 ">User name</th>
               <th className="text-left golden-border p-3">Time</th>
               <th className="text-left golden-border p-3">Iterations</th>
               <th className="text-left golden-border p-3">Date</th>
@@ -57,17 +57,17 @@ function Scores({scores, currentUserId}: ScoresPops) {
                 <tr
                   key={score.id}
                 >
-                  <td className="golden-border text-muted-gold p-2">{score.user.name}</td>
-                  <td className="golden-border text-muted-gold p-2">{convertTimeForScreen(score.used_time)}</td>
-                  <td className="golden-border text-muted-gold p-2">{score.iterations}</td>
-                  <td className="golden-border text-muted-gold p-2">{formatDate(score.date)}</td>
+                  <td className="golden-border text-bright-gold p-2">{score.user.name}</td>
+                  <td className="golden-border text-bright-gold p-2">{convertTimeForScreen(score.used_time)}</td>
+                  <td className="golden-border text-bright-gold p-2">{score.iterations}</td>
+                  <td className="golden-border text-bright-gold p-2">{formatDate(score.date)}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>) : (<h2>No scores available</h2>)}
       </section>
-    </div>
+    </main>
   );
 }
 

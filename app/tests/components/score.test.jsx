@@ -35,43 +35,43 @@ const scores = [
     id: '3',
   }
 ];
+describe('scores screen', ()=>{
+  test('displays Scores screen', async () => {
+    render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
 
-test('displays Scores screen', async () => {
-  render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
+    expect(screen.getByRole('link')).toHaveTextContent('back to game')
+    expect(screen.getByText('Scores')).toBeInTheDocument();
+    expect(screen.getByLabelText('All users')).toBeChecked();
+    expect(screen.getByRole('table')).toBeInTheDocument();
+  })
 
-  expect(screen.getByRole('link')).toHaveTextContent('back to game')
-  expect(screen.getByText('Scores')).toBeInTheDocument();
-  expect(screen.getByLabelText('All users')).toBeChecked();
-  expect(screen.getByRole('table')).toBeInTheDocument();
-})
+  test('filters scores by current user', async () => {
+    render(<Score scores={scores} currentUserId="410544b2-4001-4271-9855-fec4b6a6442a" />);
 
-test('filters scores by current user', async () => {
-  render(<Score scores={scores} currentUserId="410544b2-4001-4271-9855-fec4b6a6442a" />);
+    const radioButton = screen.getByLabelText('Only me');
+    await userEvent.click(radioButton);
+    expect(screen.getByLabelText('Only me')).toBeChecked();
+    const filteredScores = scores.filter(score => score.user.id === '410544b2-4001-4271-9855-fec4b6a6442a');
+    expect(screen.getAllByRole('row')).toHaveLength(filteredScores.length + 1);
+  });
 
-  const radioButton = screen.getByLabelText('Only me');
-  await userEvent.click(radioButton);
-  expect(screen.getByLabelText('Only me')).toBeChecked();
-  const filteredScores = scores.filter(score => score.user.id === '410544b2-4001-4271-9855-fec4b6a6442a');
-  expect(screen.getAllByRole('row')).toHaveLength(filteredScores.length + 1);
-});
+  test('handles missing or undefined scores gracefully', () => {
+    render(<Score scores={undefined} currentUserId="12345" />);
 
-test('handles missing or undefined scores gracefully', () => {
-  render(<Score scores={undefined} currentUserId="12345" />);
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
 
-  expect(screen.queryByRole('table')).not.toBeInTheDocument();
-
-  expect(screen.getByText('No scores available')).toBeInTheDocument();
-});
+    expect(screen.getByText('No scores available')).toBeInTheDocument();
+  });
 
 
-test('loading time Scores screen', async () => {
-  jest.resetModules()
-  const start = performance.now();
-  render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
-  const end = performance.now();
-  const renderTime = end - start
-  console.log(`Component rendered in ${renderTime}ms`);
+  test('loading time Scores screen', async () => {
+    const start = performance.now();
+    render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
+    const end = performance.now();
+    const renderTime = end - start
+    console.log(`Component rendered in ${renderTime}ms`);
 
-  expect(renderTime).toBeLessThanOrEqual(100);
+    expect(renderTime).toBeLessThanOrEqual(50);
+  })
 
 })

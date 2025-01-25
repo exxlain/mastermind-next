@@ -65,6 +65,7 @@ test('handles missing or undefined scores gracefully', () => {
 
 
 test('loading time Scores screen', async () => {
+  jest.resetModules()
   const start = performance.now();
   render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
   const end = performance.now();

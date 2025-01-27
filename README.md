@@ -20,7 +20,7 @@ pnpm dev
 - [Jest](https://jestjs.io/)
 - [React Testing Library](https://testing-library.com/)
 - [Storybook](https://storybook.js.org/) (link for: [deployed build](https://670015e350c5cf2da8b33e88-tacnsxwpxw.chromatic.com/))
-
+- [React scan](https://react-scan.com/)
 
 ## Mastermind game rules
 

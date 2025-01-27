@@ -27,7 +27,7 @@ export default function RootLayout({
           <meta name={'description'} content={"mastermind game"} />
           <meta property={"og:description"} content={"logic game"}/>
           <meta property={"og:image"} content={"public/mastermind.webp"}/>
-          <script src="https://unpkg.com/react-scan/dist/auto.global.js"/>
+          <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
         </head>
         <body className={`${Castlemar.className} antialiased`}>
           {children}

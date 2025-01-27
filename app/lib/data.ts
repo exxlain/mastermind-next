@@ -1,9 +1,15 @@
 import prisma from '@/lib/prisma';
 
 
-export async function fetchScores() {
+export async function fetchScores(page = 1, limit = 20) {
   try {
-    return await prisma.scores.findMany({
+    const skip = (page - 1) * limit;
+
+    const total = await prisma.scores.count();
+
+    const scores = await prisma.scores.findMany({
+      skip,
+      take: limit,
       select: {
         id: true,
         date: true,
@@ -20,6 +26,10 @@ export async function fetchScores() {
         date: 'desc',
       },
     })
+    return {
+      total,
+      scores,
+    }
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all scores.');

@@ -47,6 +47,7 @@ test.describe('game page', () => {
   test('should not have any automatically detectable accessibility issues', async ({ page }) => {
     await page.waitForLoadState('networkidle')
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    console.log(accessibilityScanResults.violations, 'accessibilityScanResults.violations')
     expect(accessibilityScanResults.violations).toEqual([]);
   });
 });

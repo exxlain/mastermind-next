@@ -2,7 +2,7 @@ export enum Routes {
     LOGIN = "/login",
     SIGNUP = "/signup",
     GAME = "/game",
-    SCORE = "/score",
+    SCORE = "/score/page/1",
     HOME = "/",
 }
 

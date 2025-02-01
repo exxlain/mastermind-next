@@ -25,3 +25,10 @@ export const colorSymbolMap = {
 };
 
 export const numberOfAnimationElements = 30;
+
+export const scoresParams = {
+  elementHeight: 36,
+  margin: 100,
+  elementsDefaultValue: 18,
+  defaultPage: 1,
+}

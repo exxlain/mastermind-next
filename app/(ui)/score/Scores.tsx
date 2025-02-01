@@ -1,55 +1,70 @@
 'use client'
-import { useState } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import {Routes} from "@routes";
+import { useRouter, useParams } from "next/navigation";
 import convertTimeForScreen from "@/app/helpers/convertTimeForScreen";
 import { ScoreForScreen} from "@/app/lib/definitions";
 import formatDate from "@/app/helpers/formatDate";
 import DarkButton from "@/app/components/Buttons/DarkButton/DarkButton";
 import Link from "next/link";
+import {scoresParams} from "@/app/lib/constants";
 
 
-const filterScores = (scores: Array<ScoreForScreen>, currentUserId: string): Array<ScoreForScreen>=>{
-  return scores.filter(score=>score.user.id===currentUserId)
-}
 interface ScoresPops {
   scores: Array<ScoreForScreen>;
-  currentUserId: string;
   total: number,
 }
 
-
-const ScoresPagination = ({ pagesNumber }) => {
+const ScoresPagination = ({ pagesNumber }: { pagesNumber: number }) => {
+  const params = useParams()
+  const page = params.page;
   return (
-    <ul className="flex list-none justify-center">
-      {[...Array(pagesNumber)].map((_, index) => (
-        <li key={index}>
-          <Link
-            href={`/score/page/${index + 1}`}
-            className="mt-[20px] w-14 h-14 bg-dark-red font-medium text-muted-gold transition-colors hover:bg-bright-red text-lg shadow-custom-shadow rounded-full flex items-center justify-center"
-          >
-            {index + 1}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <nav aria-label="Scores navigation">
+      <ul className="flex list-none justify-center" role="navigation">
+        {[...Array(pagesNumber)].map((_, index) => {
+          const pageNumber = index + 1;
+          const isCurrentPage = pageNumber === Number(page);
+          return (
+            <li key={index}>
+              <Link
+                href={`/score/page/${pageNumber}`}
+                aria-current={isCurrentPage ? 'page' : undefined}
+                aria-label={`Page ${pageNumber}`}
+                className={`mt-[20px] w-14 h-14 font-medium text-lg shadow-custom-shadow rounded-full flex items-center justify-center ${
+                  isCurrentPage
+                    ? 'bg-bright-red text-muted-gold'
+                    : 'bg-dark-red text-muted-gold hover:bg-bright-red'
+                }`}>
+                {pageNumber}
+              </Link>
+            </li>
+          )})}
+      </ul>
+    </nav>
   );
 };
 
+const getElementNumber = ()=>{
+  const height = window.innerHeight - scoresParams.margin*2
+  return Math.floor(height/scoresParams.elementHeight)
+}
 
-function Scores({scores, total, currentUserId}: ScoresPops) {
-  const [allUsersFiltering, setAllUsersFiltering] = useState<'allUsers' | 'onlyMe'>('allUsers')
-  const pagesNumber = Math.ceil(total/18);
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>)=>{
-    setAllUsersFiltering(evt.target.value  as 'allUsers' | 'onlyMe')
-  }
+function Scores({scores, total}: ScoresPops) {
+  const router = useRouter();
+  const routerRef = useRef(router);
 
+  useLayoutEffect(() => {
+    const elements = getElementNumber();
+    routerRef.current.replace(`?elementNumber=${elements}`);
+  }, []);
 
-  const filteredScores = allUsersFiltering ==='allUsers' ? scores : filterScores(scores, currentUserId)
+  const pagesNumber = Math.ceil(total/getElementNumber());
+  const minTableSectionHeight = window.innerHeight - scoresParams.margin*2
   return (
     <main className="flex fle w-full flex-col md:col-span-4">
-      <section className='flex items-center w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto px-3'>
+      <section className='flex justify-between items-center w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto px-3'>
         <h1 className="text-3xl pr-6">Scores</h1>
-        <fieldset className="text-ml flex-grow">
+        {/*       <fieldset className="text-ml flex-grow">
           <div className='my-5'>
             <input onChange={handleChange} className='mr-2' id='all users' type="radio" name='filter' value={'allUsers'} checked={allUsersFiltering==='allUsers'}/>
             <label htmlFor='all users'>All users</label>
@@ -58,14 +73,14 @@ function Scores({scores, total, currentUserId}: ScoresPops) {
             <input onChange={handleChange} className='mr-2' id='only me' type="radio" name='filter' value={'onlyMe'} checked={allUsersFiltering==='onlyMe'}/>
             <label htmlFor='only me'>Only me</label>
           </div>
-        </fieldset>
+        </fieldset>*/}
         <div className='my-5'>
           <DarkButton route={Routes.GAME} title={'back to game'} px={3} py={2}/>
         </div>
       </section>
-      <section className="w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto overflow-hidden rounded-md">
-        {filteredScores?.length ? (<>
-          <table className="table-auto w-full">
+      <section className={`w-full sm:w-7/12 md:w-7/12 lg:w-1/2 xl:w-1/2 mx-auto overflow-hidden rounded-md`}>
+        {scores?.length ? (<><div style={{height: minTableSectionHeight}}>
+          <table className={'table-auto w-full'}>
             <thead
               className={'text-dark-red bg-bright-gold'}
             >
@@ -77,7 +92,7 @@ function Scores({scores, total, currentUserId}: ScoresPops) {
               </tr>
             </thead>
             <tbody>
-              {filteredScores.map((score) => {
+              {scores.map((score) => {
                 return (
                   <tr
                     key={score.id}
@@ -91,7 +106,8 @@ function Scores({scores, total, currentUserId}: ScoresPops) {
               })}
             </tbody>
           </table>
-          <ScoresPagination pagesNumber={ pagesNumber}/>
+        </div>
+        <ScoresPagination pagesNumber={pagesNumber}/>
         </>
         ) : (<h2>No scores available</h2>)}
       </section>

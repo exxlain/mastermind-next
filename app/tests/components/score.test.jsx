@@ -1,6 +1,5 @@
-import Score from "app/(ui)/score/(page).tsx";
+import Score from "app/(ui)/score/Scores";
 import {render, screen} from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
 const scores = [
@@ -35,28 +34,36 @@ const scores = [
     id: '3',
   }
 ];
+const total = 10
+
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    replace: jest.fn(),
+  }),
+  useParams: () => ({
+    page: '1',
+  }),
+}));
+
+beforeEach(() => {
+  Object.defineProperty(window, 'innerHeight', {
+    writable: true,
+    value: 800,
+  });
+});
+
+
 describe('scores screen', ()=>{
   test('displays Scores screen', async () => {
-    render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
+    render(<Score total={total} scores={scores}/>)
 
-    expect(screen.getByRole('link')).toHaveTextContent('back to game')
+    expect(screen.getByRole('link', { name: /back to game/i })).toBeInTheDocument();
     expect(screen.getByText('Scores')).toBeInTheDocument();
-    expect(screen.getByLabelText('All users')).toBeChecked();
     expect(screen.getByRole('table')).toBeInTheDocument();
   })
 
-  test('filters scores by current user', async () => {
-    render(<Score scores={scores} currentUserId="410544b2-4001-4271-9855-fec4b6a6442a" />);
-
-    const radioButton = screen.getByLabelText('Only me');
-    await userEvent.click(radioButton);
-    expect(screen.getByLabelText('Only me')).toBeChecked();
-    const filteredScores = scores.filter(score => score.user.id === '410544b2-4001-4271-9855-fec4b6a6442a');
-    expect(screen.getAllByRole('row')).toHaveLength(filteredScores.length + 1);
-  });
-
   test('handles missing or undefined scores gracefully', () => {
-    render(<Score scores={undefined} currentUserId="12345" />);
+    render(<Score total={total} scores={undefined}/>);
 
     expect(screen.queryByRole('table')).not.toBeInTheDocument();
 
@@ -66,7 +73,7 @@ describe('scores screen', ()=>{
 
   test('loading time Scores screen', async () => {
     const start = performance.now();
-    render(<Score url="/score" scores={scores} currentUserId={'410544b2-4001-4271-9855-fec4b6a6442a'} />)
+    render(<Score total={total} scores={scores}/>)
     const end = performance.now();
     const renderTime = end - start
     console.log(`Component rendered in ${renderTime}ms`);

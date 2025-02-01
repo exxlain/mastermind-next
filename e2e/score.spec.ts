@@ -6,13 +6,13 @@ test.describe('scores page', () => {
     if(browserName!=='webkit'){
       const startTime = Date.now();
 
-      await page.goto('./score', { waitUntil: 'load' });
+      await page.goto('./score/page/1', { waitUntil: 'load' });
 
       const endTime = Date.now();
       const loadTime = endTime - startTime;
       console.log(`scores page load time (manual measurement): ${loadTime}ms`);
 
-      await expect(page).toHaveURL('./score');
+      await expect(page).toHaveURL('./score/page/1');
 
 
       const supportsPerformanceAPI = await page.evaluate(() => {
